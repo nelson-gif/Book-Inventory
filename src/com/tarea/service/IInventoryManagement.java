@@ -1,6 +1,7 @@
 package com.tarea.service;
 
 import com.tarea.domain.Book;
+import com.tarea.domain.Gender;
 
 public interface IInventoryManagement {
 	
@@ -12,8 +13,10 @@ public interface IInventoryManagement {
 	
 	void listBooks();
 	
-	void search(String title, String author, String gender, String isbn);
+	void search(String title, String author, Gender gender, String isbn);
 	
 	void listPrice();
+	
+	void listByGender();
 
 }

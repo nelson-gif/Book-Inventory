@@ -3,6 +3,7 @@ package com.tarea.data;
 import java.util.*;
 
 import com.tarea.domain.Book;
+import com.tarea.domain.Gender;
 
 public interface IBookInventory {
 	
@@ -15,7 +16,7 @@ public interface IBookInventory {
 	
 	<K, V> void listMap(Map<K,V> myMap); 
 	
-	List<Book> search(String title, String author, String gender, String isbn);
+	List<Book> search(String title, String author, Gender gender, String isbn);
 	
 	Set<Book> classificationGenre();
 	
