@@ -41,12 +41,12 @@ public class BookInventory implements IBookInventory{
 	
 
 	@Override
-	public List<Book> search(String title, String author, String genre, String isbn) {
+	public List<Book> search(String title, String author, String gender, String isbn) {
 		List<Book> books = new ArrayList<>();
 
 		inventory.forEach( element -> {
 			if(element.getTitle().equalsIgnoreCase(title) || element.getAuthor().equalsIgnoreCase(author)
-					|| element.getGenre().equalsIgnoreCase(genre) || element.getISBN().equalsIgnoreCase(isbn)) {
+					|| element.getGenre().equalsIgnoreCase(gender) || element.getISBN().equalsIgnoreCase(isbn)) {
 				books.add(element);
 			}
 		});
@@ -64,6 +64,21 @@ public class BookInventory implements IBookInventory{
 	public Set<Book> getInventory(){
 		return this.inventory;
 	}
+
+	@Override
+	public <K, V> void listMap(Map<K, V> myMap) {
+		myMap.forEach( (key, value) -> {
+			System.out.println("ISBN: "+key+", price: "+value);
+		});
+		
+	}
+
+	@Override
+	public Map<String, Double> getMap() {
+		return this.pricing;
+	}
+
+	
 	
 
 }

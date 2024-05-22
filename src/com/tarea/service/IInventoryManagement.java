@@ -8,10 +8,12 @@ public interface IInventoryManagement {
 	
 	boolean removeBook(String isbn);
 	
-	boolean updateBook(Book existentBook, Book newBook);
+	Book updateBook(String isbn);
 	
 	void listBooks();
 	
-	void search(String title, String author, String genre, String isbn);
+	void search(String title, String author, String gender, String isbn);
+	
+	void listPrice();
 
 }

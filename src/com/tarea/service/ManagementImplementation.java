@@ -28,14 +28,18 @@ public class ManagementImplementation implements IInventoryManagement{
 	}
 
 	@Override
-	public boolean updateBook(Book existentBook, Book newBook) {
-		boolean delete = inventory.removeBook(existentBook.getISBN());
+	public Book updateBook(String isbn) {
+		Book content = null;
 		
-		if(delete) {
-			inventory.addBook(newBook);
+		for(Book element: inventory.getInventory()) {
+			if(element.getISBN().equals(isbn)) {
+				return element;
+			}
 		}
 		
-		return delete;
+		System.out.println("Book doesn't exist");
+		
+		return content;
 	}
 
 	@Override
@@ -46,12 +50,21 @@ public class ManagementImplementation implements IInventoryManagement{
 	}
 	
 	@Override
-	public void search(String title, String author, String genre, String isbn) {
-		List<Book> searchList = inventory.search(title, author, genre, isbn);
+	public void search(String title, String author, String gender, String isbn) {
+		List<Book> searchList = inventory.search(title, author, gender, isbn);
 		
 		inventory.listBooks(searchList);
 		
 	}
+
+	@Override
+	public void listPrice() {
+		Map<String, Double> price = inventory.getMap();
+		
+		inventory.listMap(price);
+	}
+	
+	
 	
 	
 	

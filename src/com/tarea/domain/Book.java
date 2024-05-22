@@ -7,20 +7,23 @@ public class Book {
 	private String title;
 	private String author;
 	private String ISBN;
-	private String genre;
+	private String gender;
 	private double price;
 	private int quantity;
+	private boolean stock;
 	
+
 	public Book() {}
 
-	public Book(String title, String author, String iSBN, String genre, double price, int quantity) {
+	public Book(String title, String author, String iSBN, String gender, double price, int quantity, boolean stock) {
 		super();
 		this.title = title;
 		this.author = author;
 		ISBN = iSBN;
-		this.genre = genre;
+		this.gender = gender;
 		this.price = price;
 		this.quantity = quantity;
+		this.stock = stock;
 	}
 
 	public String getTitle() {
@@ -48,11 +51,11 @@ public class Book {
 	}
 
 	public String getGenre() {
-		return genre;
+		return gender;
 	}
 
 	public void setGenre(String genre) {
-		this.genre = genre;
+		this.gender = genre;
 	}
 
 	public double getPrice() {
@@ -71,6 +74,14 @@ public class Book {
 		this.quantity = quantity;
 	}
 
+	public boolean isStock() {
+		return stock;
+	}
+	
+	public void setStock(boolean stock) {
+		this.stock = stock;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -80,13 +91,22 @@ public class Book {
 		builder.append(author);
 		builder.append(", ISBN=");
 		builder.append(ISBN);
-		builder.append(", genre=");
-		builder.append(genre);
+		builder.append(", gender=");
+		builder.append(gender);
 		builder.append(", price=");
 		builder.append(price);
 		builder.append(", quantity=");
 		builder.append(quantity);
+		
+		if(stock) {
+			builder.append(", stock=restocked +");
+			builder.append(quantity);
+		}else {
+			builder.append(", stock=sold");
+		}
+		
 		builder.append("]");
+		
 		return builder.toString();
 	}
 
