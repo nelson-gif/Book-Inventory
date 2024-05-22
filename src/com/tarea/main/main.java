@@ -3,6 +3,7 @@ package com.tarea.main;
 import java.util.Scanner;
 
 import com.tarea.domain.Book;
+import com.tarea.domain.Gender;
 import com.tarea.service.*;
 
 public class main {
@@ -40,7 +41,44 @@ public class main {
 						System.out.println("Enter the ISBN:");
 						String isbn = sc.nextLine();
 						System.out.println("Enter the gender:");
-						String gender = sc.nextLine();
+						
+						boolean x = false;
+						Gender gen = null;
+						do {
+							x= false;
+							System.out.println("1. "+Gender.FICTION);
+							System.out.println("2. "+Gender.NON_FICTION);
+							System.out.println("3. " +Gender.MYSTERY);
+							System.out.println("4. " + Gender.ROMANCE);
+							
+							try {
+								
+								int gender = Integer.parseInt(sc.nextLine());
+								switch(gender) {
+									case 1:
+										gen = Gender.FICTION;
+										break;
+									case 2:
+										gen = Gender.NON_FICTION;
+										break;
+									case 3:
+										gen = Gender.MYSTERY;
+										break;
+									case 4:
+										gen = Gender.ROMANCE;
+										break;
+									default:
+										System.out.println("choose an option between 1 and 4");
+										x = true;
+								}
+								
+							}catch(NumberFormatException e) {
+								System.out.println("Enter a number");
+								x = true;
+							}
+							
+						}while(x);
+						
 						boolean o;
 						//handling exception if no number is entered
 						Double price = 0D;
@@ -75,7 +113,7 @@ public class main {
 							}
 						}while(o);
 						
-						Book book = new Book(title, author, isbn, gender, price, quantity, stock);
+						Book book = new Book(title, author, isbn, gen, price, quantity, stock);
 						boolean wasAdded = obj.addNewBook(book);
 						
 						if(wasAdded) {
@@ -95,6 +133,7 @@ public class main {
 						System.out.println("Enter the ISBN of the book that you want to edit: ");
 						String isbn3 = sc.nextLine();
 						//handling exception if no number is entered
+						try {
 						if(!obj.updateBook(isbn3).equals(null)) {
 							Book book3 = obj.updateBook(isbn3);
 							System.out.println("Enter the new title or hit enter to not Edit the title");
@@ -107,11 +146,50 @@ public class main {
 							if(!author3.equals("")) {
 								book3.setAuthor(author3);
 							}
-							System.out.println("Enter the new gender or hit enter to not edit the gender");
-							String gender3 = sc.nextLine();
-							if(!gender3.equals("")) {
-								book3.setGenre(gender3);
-							}
+							System.out.println("Enter the number of the new gender, or enter 0 to not edit it");
+							
+							do {
+								x= false;
+								System.out.println("0. do not edit");
+								System.out.println("1. "+Gender.FICTION);
+								System.out.println("2. "+Gender.NON_FICTION);
+								System.out.println("3. " +Gender.MYSTERY);
+								System.out.println("4. " + Gender.ROMANCE);
+								
+								try {
+									
+									int gender = Integer.parseInt(sc.nextLine());
+									switch(gender) {
+										case 0:
+											break;
+										case 1:
+											gen = Gender.FICTION;
+											book3.setGenre(gen);
+											break;
+										case 2:
+											gen = Gender.NON_FICTION;
+											book3.setGenre(gen);
+											break;
+										case 3:
+											gen = Gender.MYSTERY;
+											book3.setGenre(gen);
+											break;
+										case 4:
+											gen = Gender.ROMANCE;
+											book3.setGenre(gen);
+											break;
+										default:
+											System.out.println("choose an option between 1 and 4");
+											x = true;
+									}
+									
+								}catch(NumberFormatException e) {
+									System.out.println("Enter a number");
+									x = true;
+								}
+								
+							}while(x);
+							
 							
 							do {
 								o = false;
@@ -149,7 +227,9 @@ public class main {
 							}while(o);
 							
 						}
-						
+						}catch(NullPointerException e) {
+							System.out.println("book doesn't exist");
+						}
 						System.out.println("Changes were completed!");
 						break;
 						
@@ -174,16 +254,57 @@ public class main {
 						System.out.println("Enter the author:");
 						String author2 = sc.nextLine();
 						System.out.println("Enter the Gender");
-						String gender2 = sc.nextLine();
+						
+						Gender gen2 = null;
+						do {
+							x= false;
+							System.out.println("0. I don't know the gender");
+							System.out.println("1. "+Gender.FICTION);
+							System.out.println("2. "+Gender.NON_FICTION);
+							System.out.println("3. " +Gender.MYSTERY);
+							System.out.println("4. " + Gender.ROMANCE);
+							
+							try {
+								
+								int gender = Integer.parseInt(sc.nextLine());
+								switch(gender) {
+									case 0:
+										break;
+									case 1:
+										gen2 = Gender.FICTION;
+										break;
+									case 2:
+										gen2 = Gender.NON_FICTION;
+										break;
+									case 3:
+										gen2= Gender.MYSTERY;
+										break;
+									case 4:
+										gen2 = Gender.ROMANCE;
+										break;
+									default:
+										System.out.println("choose an option between 0 and 4");
+										x = true;
+								}
+								
+							}catch(NumberFormatException e) {
+								System.out.println("Enter a number");
+								x = true;
+							}
+							
+						}while(x);
+						
+						
 						System.out.println("Enter the isbn");
 						String isbn2 = sc.nextLine();
 						
 						System.out.println("See the results below: ");
-						obj.search(title1, author2, gender2, isbn2);
+						obj.search(title1, author2, gen2, isbn2);
 						
 						break;
 						
 					case 6:
+						obj.listByGender();
 						break;
 						
 					case 7:

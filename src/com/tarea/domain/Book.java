@@ -7,7 +7,7 @@ public class Book {
 	private String title;
 	private String author;
 	private String ISBN;
-	private String gender;
+	private Gender gender;
 	private double price;
 	private int quantity;
 	private boolean stock;
@@ -15,7 +15,7 @@ public class Book {
 
 	public Book() {}
 
-	public Book(String title, String author, String iSBN, String gender, double price, int quantity, boolean stock) {
+	public Book(String title, String author, String iSBN, Gender gender, double price, int quantity, boolean stock) {
 		super();
 		this.title = title;
 		this.author = author;
@@ -50,12 +50,12 @@ public class Book {
 		ISBN = iSBN;
 	}
 
-	public String getGenre() {
-		return gender;
+	public Gender getGenre() {
+		return this.gender;
 	}
 
-	public void setGenre(String genre) {
-		this.gender = genre;
+	public void setGenre(Gender gender) {
+		this.gender = gender;
 	}
 
 	public double getPrice() {

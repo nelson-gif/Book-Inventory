@@ -3,6 +3,7 @@ package com.tarea.data;
 import java.util.*;
 
 import com.tarea.domain.Book;
+import com.tarea.domain.Gender;
 
 public class BookInventory implements IBookInventory{
 	
@@ -41,12 +42,12 @@ public class BookInventory implements IBookInventory{
 	
 
 	@Override
-	public List<Book> search(String title, String author, String gender, String isbn) {
+	public List<Book> search(String title, String author, Gender gender, String isbn) {
 		List<Book> books = new ArrayList<>();
 
 		inventory.forEach( element -> {
 			if(element.getTitle().equalsIgnoreCase(title) || element.getAuthor().equalsIgnoreCase(author)
-					|| element.getGenre().equalsIgnoreCase(gender) || element.getISBN().equalsIgnoreCase(isbn)) {
+					|| element.getGenre().equals(gender) || element.getISBN().equalsIgnoreCase(isbn)) {
 				books.add(element);
 			}
 		});
